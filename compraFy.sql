@@ -36,7 +36,7 @@ create table clientes(
 	region_id int not null,
 	comuna_id int not null,
 	rol_id int not null,
-	activado smallint not null
+	activado smallint not null,
 	nombre varchar(50) not null,
 	apellido varchar(50) not null,
 	run varchar(20) not null,
