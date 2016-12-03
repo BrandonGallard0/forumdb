@@ -1,2 +1,2 @@
 # forumdb
-Database structure for the forum
+Database structure for the project
