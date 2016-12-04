@@ -80,7 +80,11 @@ create table preguntas(
     id int not null primary key generated always as identity,
     cliente_id int not null,
     pregunta varchar(255) not null,
-    creado_el date not null current_timestamp
+    creado_el timestamp not null default current_timestamp,
+
+    /* FOREIGN KEYS */
+    /* pregunta --> cliente */
+	constraint FK_pregunta_cliente foreign key (cliente_id) references clientes(id)
     
 );
 
@@ -90,18 +94,10 @@ create table respuestas(
     pregunta_id int not null, 
     cliente_id int not null,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     _id int not null,
     respuesta varchar(255) not null,
-    creado_el date not null current_timestamp
+    creado_el timestamp not null default current_timestamp,
+	
+	constraint FK_respuesta_pregunta foreign key (pregunta_id) references preguntas(id),
 
+	/* respuesta --> cliente */
+	constraint FK_respuesta_cliente foreign key (cliente_id) references clientes(id)
 );
-
-/* pregunta --> cliente */
-alter table add constraint "FK_pregunta_cliente"
-foreign key preguntas(cliente_id) references clientes(id);
-
-/* respuesta --> pregunta */
-alter table add constraint "FK_respuesta_pregunta"
-foreign key respuestas(pregunta_id) references preguntas(id);
-
-/* respuesta --> cliente */
-alter table respuestas add constraint "FK_respuesta_cliente"
-foreign key respuestas(cliente_id) references clientes(id);
