@@ -43,7 +43,7 @@ create table clientes(
 	password varchar(255) not null,
 	edad int not null,
 	telefono varchar(20) not null,
-	creado_el date not null current_timestamp,
+	creado_el timestamp not null default current_timestamp,
 	actualizado_el date not null
 );
 
