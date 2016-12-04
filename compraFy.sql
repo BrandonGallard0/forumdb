@@ -21,7 +21,7 @@ create table comunas(
 
 create table roles(
 	id int not null generated always as identity,
-	tipo varchar(20) not null,
+	tipo varchar(20) not null
 );
 
 create table role_cliente(
