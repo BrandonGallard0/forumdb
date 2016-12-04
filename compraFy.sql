@@ -92,7 +92,7 @@ create table respuestas(
 
     id int not null primary key generated always as identity,
     pregunta_id int not null, 
-    cliente_id int not null,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     _id int not null,
+    cliente_id int not null,
     respuesta varchar(255) not null,
     creado_el timestamp not null default current_timestamp,
 	
