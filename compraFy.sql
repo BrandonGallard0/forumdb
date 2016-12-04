@@ -3,35 +3,35 @@
  */
 
 create table paises(
-	id int not null generated always as identity,
+	id int not null primary key generated always as identity,
 	nombre varchar(50) not null
 );
 
 create table regiones(
-	id int not null generated always as identity,
+	id int not null primary key generated always as identity,
 	pais_id int not null,
 	nombre varchar(50) not null	
 );
 
 create table comunas(
-	id int not null generated always as identity,
+	id int not null primary key generated always as identity,
 	region_id int not null,
 	nombre varchar(50) not null
 );
 
 create table roles(
-	id int not null generated always as identity,
+	id int not null primary key generated always as identity,
 	tipo varchar(20) not null
 );
 
 create table role_cliente(
-	id int not null generated always as identity,
+	id int not null primary key generated always as identity,
 	role_id int not null,
 	cliente_id int not null
 );
 
 create table clientes(
-	id int not null generated always as identity,
+	id int not null primary key generated always as identity,
 	pais_id int not null,
 	region_id int not null,
 	comuna_id int not null,
@@ -48,14 +48,13 @@ create table clientes(
 );
 
 create table productos (
-	id int not null generated always as identity,
+	id int not null primary key generated always as identity,
 	foto varchar(255) not null,
 	nombre varchar(50) not null,
 	descripcion varchar(255) not null,
 	precio int not null,
 	stock int not null
 );
-
 
 /* CLIENTE --> ROL */
 
