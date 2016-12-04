@@ -1,4 +1,4 @@
-# forumdb
+# CompraFy
 Database structure for the project
 
 
