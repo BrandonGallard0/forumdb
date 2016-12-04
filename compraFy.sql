@@ -10,13 +10,15 @@ create table paises(
 create table regiones(
 	id int not null primary key generated always as identity,
 	pais_id int not null,
-	nombre varchar(50) not null	
+	nombre varchar(50) not null,
+	constraint FK_region_pais foreign key (pais_id) references paises(id)
 );
 
 create table comunas(
 	id int not null primary key generated always as identity,
 	region_id int not null,
-	nombre varchar(50) not null
+	nombre varchar(50) not null,
+	constraint FK_comuna_region foreign key (region_id) references regiones(id)
 );
 
 create table roles(
@@ -24,11 +26,6 @@ create table roles(
 	tipo varchar(20) not null
 );
 
-create table role_cliente(
-	id int not null primary key generated always as identity,
-	role_id int not null,
-	cliente_id int not null
-);
 
 create table clientes(
 	id int not null primary key generated always as identity,
@@ -44,7 +41,25 @@ create table clientes(
 	edad int not null,
 	telefono varchar(20) not null,
 	creado_el timestamp not null default current_timestamp,
-	actualizado_el date not null
+	actualizado_el date not null,
+
+	/* Foreign keys */
+
+	constraint FK_cliente_pais foreign key (pais_id) references paises(id),
+    constraint FK_cliente_region foreign key (region_id) references regiones(id),
+    constraint FK_cliente_comuna foreign key (comuna_id) references comunas(id),
+    constraint FK_cliente_rol foreign key (rol_id) references roles(id)
+);
+
+
+create table role_cliente(
+	id int not null primary key generated always as identity,
+	role_id int not null,
+	cliente_id int not null,
+
+	/* FOREIGN KEYS */
+	constraint FK_role_cliente_rol foreign key (role_id) references roles(id),
+	constraint FK_role_cliente_cliente foreign key (cliente_id) references clientes(id)
 );
 
 create table productos (
@@ -55,26 +70,6 @@ create table productos (
 	precio int not null,
 	stock int not null
 );
-
-/* CLIENTE --> ROL */
-
-alter table role_cliente add constraint foreign key role_cliente(role_id) references roles(id);
-alter table role_cliente add constraint foreign key role_cliente(cliente_id) references clientes(id);
-
-
-/* REGION --> PAIS */
-alter table regiones add constraint "FK_region_pais" foreign key regiones(pais_id) references paises(id);
-
-/* COMUNA --> REGION */
-alter table comunas add constraint "FK_comuna_region" foreign key comunas(region_id) references regiones(id);
-
-
-/* CLIENTE --> PAIS, REGION, COMUNA */
-
-alter table clientes add constraint "FK_cliente_pais" foreign key clientes(pais_id) references paises(id);
-alter table clientes add constraint "FK_cliente_region" foreign key clientes(region_id) references regiones(id);
-alter table clientes add constraint "FK_cliente_comuna" foreign key clientes(comuna_id) references comunas(id);
-alter table clientes add constraint "FK_cliente_rol" foreign key clientes(rol_id) references roles(id);
 
 
 /**
