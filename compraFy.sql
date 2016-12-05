@@ -72,6 +72,18 @@ create table productos (
 );
 
 
+create table compras(
+    id int not null primary key generated always as identity,
+    cliente_id int not null,
+    producto_id int not null,
+    fecha_compra timestamp default current_timestamp,
+
+    /* foreign keys */
+    constraint FK_compra_cliente foreign key (cliente_id) references clientes(id),
+    constraint FK_compra_producto foreign key (producto_id) references productos(id)
+);
+
+
 /**
  * Forum
  */
