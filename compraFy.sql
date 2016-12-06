@@ -113,3 +113,39 @@ create table respuestas(
 	/* respuesta --> cliente */
 	constraint FK_respuesta_cliente foreign key (cliente_id) references clientes(id)
 );
+
+
+
+/* Seeder */
+
+
+insert into inacap.PAISES(nombre) values('Chile');
+insert into inacap.REGIONES(pais_id,nombre) values(1,'Metropolitana');
+insert into inacap.COMUNAS(region_id,nombre) values(1,'Santiago');
+
+insert into inacap.ROLES(tipo) values('administrador');
+insert into inacap.ROLES(tipo) values('vendedor');
+insert into inacap.ROLES(tipo) values('cliente');
+
+insert into inacap.CLIENTES(pais_id,region_id,comuna_id,rol_id,activado,nombre,
+                            apellido,run,password,edad,telefono,actualizado_el) 
+                            values(1,1,1,1,1,'admin','admin','admin1','123456',1,
+                                   '9999999','2016-12-05 00:00:00');
+
+insert into inacap.CLIENTES(pais_id,region_id,comuna_id,rol_id,activado,nombre,
+                            apellido,run,password,edad,telefono,actualizado_el) 
+                            values(1,1,1,2,1,'vendedor','vendedor','vendedor1','123456',1,
+                                   '9999999','2016-12-05 00:00:00');
+
+
+
+insert into inacap.CLIENTES(pais_id,region_id,comuna_id,rol_id,activado,nombre,
+                            apellido,run,password,edad,telefono,actualizado_el) 
+                            values(1,1,1,3,1,'cliente','cliente','cliente1','123456',1,
+                                   '9999999','2016-12-05 00:00:00');
+
+insert into inacap.Productos (foto,nombre,descripcion, precio,  stock) values ('pendrive_16g.png', 'pendrive_1','util para el quehacer diario',4590,3);
+
+insert into inacap.Productos (foto,nombre,descripcion, precio, stock) values ('ventilador_usb.png', 'vent_1','rapido y silencioso',9990,5);
+
+insert into inacap.Productos (foto,nombre,descripcion, precio,stock) values ('intel_i7.png', 'proce_i7','el procesador más rápido',4590,3);
