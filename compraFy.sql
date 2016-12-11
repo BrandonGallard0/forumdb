@@ -83,6 +83,11 @@ create table compras(
     constraint FK_compra_producto foreign key (producto_id) references productos(id)
 );
 
+create table categorias(
+	id int not null primary key generated always as identity,
+	nombre varchar(20) not null
+);
+
 
 /**
  * Forum
