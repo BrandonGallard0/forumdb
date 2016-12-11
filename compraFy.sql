@@ -95,13 +95,15 @@ create table categorias(
 create table preguntas(
     
     id int not null primary key generated always as identity,
+    categoria_id int not null,
     cliente_id int not null,
     pregunta varchar(255) not null,
     creado_el timestamp not null default current_timestamp,
 
     /* FOREIGN KEYS */
     /* pregunta --> cliente */
-	constraint FK_pregunta_cliente foreign key (cliente_id) references clientes(id)
+	constraint FK_pregunta_cliente foreign key (cliente_id) references clientes(id),
+	constraint FK_pregunta_categoria foreign key (categoria_id) references categorias(id)
     
 );
 
