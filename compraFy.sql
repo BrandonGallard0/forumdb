@@ -85,6 +85,7 @@ create table compras(
 
 create table categorias(
 	id int not null primary key generated always as identity,
+	alias varchar(50) not null,
 	nombre varchar(20) not null
 );
 
@@ -98,6 +99,7 @@ create table preguntas(
     categoria_id int not null,
     cliente_id int not null,
     pregunta varchar(255) not null,
+    descripcion varchar(255) not null,
     creado_el timestamp not null default current_timestamp,
 
     /* FOREIGN KEYS */
