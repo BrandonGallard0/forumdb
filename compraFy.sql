@@ -117,7 +117,8 @@ create table respuestas(
     respuesta varchar(255) not null,
     creado_el timestamp not null default current_timestamp,
 	
-	constraint FK_respuesta_pregunta foreign key (pregunta_id) references preguntas(id),
+	constraint FK_respuesta_pregunta foreign key (pregunta_id) references preguntas(id)
+	on delete cascade,
 
 	/* respuesta --> cliente */
 	constraint FK_respuesta_cliente foreign key (cliente_id) references clientes(id)
@@ -135,6 +136,10 @@ insert into inacap.COMUNAS(region_id,nombre) values(1,'Santiago');
 insert into inacap.ROLES(tipo) values('administrador');
 insert into inacap.ROLES(tipo) values('vendedor');
 insert into inacap.ROLES(tipo) values('cliente');
+
+insert into inacap.CATEGORIAS(nombre, alias) ('General', 'alias');
+insert into inacap.CATEGORIAS(nombre, alias) ('Java', 'java');
+insert into inacap.CATEGORIAS(nombre, alias) ('Programación', 'progra');
 
 insert into inacap.CLIENTES(pais_id,region_id,comuna_id,rol_id,activado,nombre,
                             apellido,run,password,edad,telefono,actualizado_el) 
