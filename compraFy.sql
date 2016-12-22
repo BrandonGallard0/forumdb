@@ -32,7 +32,6 @@ create table clientes(
 	pais_id int not null,
 	region_id int not null,
 	comuna_id int not null,
-	rol_id int not null,
 	activado smallint not null,
 	nombre varchar(50) not null,
 	apellido varchar(50) not null,
@@ -47,20 +46,10 @@ create table clientes(
 
 	constraint FK_cliente_pais foreign key (pais_id) references paises(id),
     constraint FK_cliente_region foreign key (region_id) references regiones(id),
-    constraint FK_cliente_comuna foreign key (comuna_id) references comunas(id),
-    constraint FK_cliente_rol foreign key (rol_id) references roles(id)
+    constraint FK_cliente_comuna foreign key (comuna_id) references comunas(id)
 );
 
 
-create table role_cliente(
-	id int not null primary key generated always as identity,
-	role_id int not null,
-	cliente_id int not null,
-
-	/* FOREIGN KEYS */
-	constraint FK_role_cliente_rol foreign key (role_id) references roles(id),
-	constraint FK_role_cliente_cliente foreign key (cliente_id) references clientes(id)
-);
 
 create table productos (
 	id int not null primary key generated always as identity,
@@ -137,25 +126,25 @@ insert into inacap.ROLES(tipo) values('administrador');
 insert into inacap.ROLES(tipo) values('vendedor');
 insert into inacap.ROLES(tipo) values('cliente');
 
-insert into inacap.CATEGORIAS(nombre, alias) ('General', 'alias');
-insert into inacap.CATEGORIAS(nombre, alias) ('Java', 'java');
-insert into inacap.CATEGORIAS(nombre, alias) ('Programación', 'progra');
+	insert into inacap.CATEGORIAS(alias,nombre) values('compras','Compras Internet');
+insert into inacap.CATEGORIAS(alias,nombre) values('ventas','Sistema vendedores');
+insert into inacap.CATEGORIAS(alias,nombre) values('devoluciones','Devoluciones');
 
-insert into inacap.CLIENTES(pais_id,region_id,comuna_id,rol_id,activado,nombre,
+insert into inacap.CLIENTES(pais_id,region_id,comuna_id,activado,nombre,
                             apellido,run,password,edad,telefono,actualizado_el) 
-                            values(1,1,1,1,1,'admin','admin','admin1','123456',1,
+                            values(1,1,1,1,'admin','admin','123456789-1','123456',1,
                                    '9999999','2016-12-05 00:00:00');
 
-insert into inacap.CLIENTES(pais_id,region_id,comuna_id,rol_id,activado,nombre,
+insert into inacap.CLIENTES(pais_id,region_id,comuna_id,activado,nombre,
                             apellido,run,password,edad,telefono,actualizado_el) 
-                            values(1,1,1,2,1,'vendedor','vendedor','vendedor1','123456',1,
+                            values(1,1,1,1,'vendedor','vendedor','123456789-0','123456',1,
                                    '9999999','2016-12-05 00:00:00');
 
 
 
-insert into inacap.CLIENTES(pais_id,region_id,comuna_id,rol_id,activado,nombre,
+insert into inacap.CLIENTES(pais_id,region_id,comuna_id,activado,nombre,
                             apellido,run,password,edad,telefono,actualizado_el) 
-                            values(1,1,1,3,1,'cliente','cliente','cliente1','123456',1,
+                            values(1,1,1,1,'cliente','cliente','123456789-k','123456',1,
                                    '9999999','2016-12-05 00:00:00');
 
 insert into inacap.Productos (foto,nombre,descripcion, precio,  stock) values ('pendrive_16g.png', 'pendrive_1','util para el quehacer diario',4590,3);
@@ -163,3 +152,19 @@ insert into inacap.Productos (foto,nombre,descripcion, precio,  stock) values ('
 insert into inacap.Productos (foto,nombre,descripcion, precio, stock) values ('ventilador_usb.png', 'vent_1','rapido y silencioso',9990,5);
 
 insert into inacap.Productos (foto,nombre,descripcion, precio,stock) values ('intel_i7.png', 'proce_i7','el procesador más rápido',4590,3);
+
+insert into inacap.PREGUNTAS(categoria_id,cliente_id,pregunta,descripcion) values 
+(1,1,'¿Como comprar?','Tengo dudas en como funciona el metodo de compras');
+insert into inacap.PREGUNTAS(categoria_id,cliente_id,pregunta,descripcion) values 
+(1,2,'¿Cada cuanto se actualiza el catalogo de productos?','Quisiera saber cuando habran mas productos disponibles');
+insert into inacap.PREGUNTAS(categoria_id,cliente_id,pregunta,descripcion) values 
+(3,3,'Devolver producto en mal estado','¿A quien puedo contactar para poder resolver mi problema? 
+        mi producto llego en malas condiciones');
+insert into inacap.PREGUNTAS(categoria_id,cliente_id,pregunta,descripcion) values 
+(1,3,'Metodos de pago','¿cuales son los metodos de pago disponibles?');
+
+
+insert into inacap.RESPUESTAS(pregunta_id,cliente_id,respuesta) values(1,1,'El proceso es simple, solamente debes dirigirte a tu carro de compras y tendras la opcion.');
+insert into inacap.RESPUESTAS(pregunta_id,cliente_id,respuesta) values(2,2,'El catalogo de producto se actualiza semanalmente.');
+insert into inacap.RESPUESTAS(pregunta_id,cliente_id,respuesta) values(3,3,'En caso de recibir productos en malas condiciones, puede contactar al telefono general de contacto.');
+insert into inacap.RESPUESTAS(pregunta_id,cliente_id,respuesta) values(4,3,'La transacción de pago solo es valida por medio de tarjetas de credito o debito.');
